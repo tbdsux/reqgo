@@ -3,13 +3,15 @@ package reqgo
 import "encoding/json"
 
 type Response struct {
-	body []byte
+	Body   []byte
+	Code   int
+	Status string
 }
 
 func (res *Response) Text() string {
-	return string(res.body)
+	return string(res.Body)
 }
 
 func (res *Response) JSON(v interface{}) error {
-	return json.Unmarshal(res.body, v)
+	return json.Unmarshal(res.Body, v)
 }

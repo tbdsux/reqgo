@@ -6,6 +6,7 @@ type Headers map[string]string
 
 type Options struct {
 	Headers Headers
+	Data    interface{}
 }
 
 func parseHeaders(req *http.Request, headers Headers) {

@@ -1,10 +1,11 @@
 package reqgo
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
+// Get issues a GET request to the url. If `opt` is not nil, it will be parsed to the request.
 func Get(url string, opt *Options) (*Response, error) {
 	return New(client).Get(url, opt)
 }
@@ -17,7 +18,7 @@ func (r *ReqGO) Get(url string, opt *Options) (*Response, error) {
 	}
 
 	if opt != nil {
-		// parse options
+		// parse headers
 		parseHeaders(req, opt.Headers)
 	}
 
@@ -27,12 +28,14 @@ func (r *ReqGO) Get(url string, opt *Options) (*Response, error) {
 	}
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
 	}
 
 	return &Response{
-		body: body,
+		Body:   body,
+		Code:   res.StatusCode,
+		Status: res.Status,
 	}, nil
 }

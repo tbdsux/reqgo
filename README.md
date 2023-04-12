@@ -2,6 +2,8 @@
 
 Simple http requests made easy
 
+> Library is very much incomplete, its only purpose is for handling basic / normal http requests
+
 ## Usage
 
 ```go
