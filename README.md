@@ -1,10 +1,18 @@
 # reqgo
 
-Simple http requests made easy
+A simple wrapper for http requests
 
-> Library is very much incomplete, its only purpose is for handling basic / normal http requests
+> Library is very much incomplete, its only purpose is for handling basic / normal http requests. Please use the default `net/http` package for more complex and control over the request
+
+## Install
+
+```sh
+go get -u github.com/tbdsux/reqgo
+```
 
 ## Usage
+
+API is based from python's `requests` module and node's `fetch` api.
 
 ```go
 package main
@@ -36,3 +44,7 @@ func main() {
 }
 
 ```
+
+##
+
+**&copy; 2023 | tbdsux**
