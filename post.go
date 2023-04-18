@@ -3,7 +3,6 @@ package reqgo
 import (
 	"bytes"
 	"encoding/json"
-	"io"
 	"net/http"
 )
 
@@ -32,25 +31,5 @@ func (r *ReqGO) Post(url string, opt *Options) (*Response, error) {
 		return nil, err
 	}
 
-	if opt != nil {
-		// parse headers
-		parseHeaders(req, opt.Headers)
-	}
-
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer res.Body.Close()
-
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	return &Response{
-		Body:   body,
-		Code:   res.StatusCode,
-		Status: res.Status,
-	}, nil
+	return r.doRequest(req, opt)
 }

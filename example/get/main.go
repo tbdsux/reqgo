@@ -9,7 +9,7 @@ import (
 
 func main() {
 	r, err := reqgo.Get("https://httpbin.org/get", &reqgo.Options{
-		Headers: reqgo.Headers{
+		Headers: &reqgo.Headers{
 			"Custom-Header": "hello world",
 		},
 	})
