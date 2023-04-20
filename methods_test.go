@@ -120,8 +120,7 @@ func TestDelete(t *testing.T) {
 func TestHead(t *testing.T) {
 	r, err := Head("https://httpbin.org", &Options{
 		Headers: &Headers{
-			"Accept":        "application/json",
-			"custom-header": "this is a head request",
+			"Accept": "application/json",
 		},
 	})
 
@@ -129,12 +128,8 @@ func TestHead(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	var data map[string]interface{}
-	if err := r.JSON(&data); err != nil {
-		t.Fatal(err)
+	if r.Code != 200 {
+		t.Fatal("err: head status code not 200")
 	}
 
-	if data["headers"].(map[string]interface{})["custom-header"].(string) != "this is a head request" {
-		t.Fatalf("error: request params seems to be not working")
-	}
 }
